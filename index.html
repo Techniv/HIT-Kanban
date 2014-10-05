@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>HIT -  Kanban</title>
+	<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+	<header>
+		<h1>HIT - Kanban</h1>
+	</header>
+	<main class="table">
+		<div class="colHead row">
+			<h2 class="cell">Todo</h2>
+			<h2 class="cell">Working</h2>
+			<h2 class="cell">Done</h2>
+		</div>
+		<div class="row">
+			<section class="column cell" id="todo" dropzone="move">
+				<div class="new ticket"></div>
+			</section>
+			<section class="column cell" id="working" dropzone="move"></section>
+			<section class="column cell" id="done" dropzone="move"></section>
+		</div>
+	</main>
+	<script type="text/html" id="template">
+		<div class="ticket create" draggable="true">
+			<h3 contenteditable="true" onblur="kanban.saveTicket(this.parentNode)">Titre</h3>
+			<p contenteditable="true" onblur="kanban.saveTicket(this.parentNode)">Description</p>
+			<label>Date : </label><input type="date" onchange="kanban.saveTicket(this.parentNode)"/>
+		</div>
+	</script>
+	<script src="script.js"></script>
+</body>
+</html>

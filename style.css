@@ -1,0 +1,55 @@
+body{
+	font-family: sans-serif;
+}
+
+.colHead h2,
+section.column{
+	border: lightgrey solid 0px;
+
+	width: 33%;
+	text-align: center;
+}
+.colHead h2:first-of-type,
+section.column:first-of-type,
+.colHead h2:last-of-type,
+section.column:last-of-type{
+	border-width: 0px 1px 0px 1px ;
+}
+main{
+	width: 100%;
+	max-width: 1200px;
+	margin: auto;
+	min-height: 500px;
+}
+.colHead{
+	height: 40px;
+}
+
+.ticket{
+	width: 90%; margin: 20px auto;
+	padding: 1px;
+	background-color: #fffd9a;
+	box-shadow: lightgray 3px 5px 8px;
+}
+.ticket input[type="date"]{
+	border: none;
+	background: transparent;
+}
+
+.ticket.new{
+	opacity: 0.5;
+	transition: all 300ms
+}
+.ticket.new:hover{
+	opacity: 1;
+}
+.ticket.new:before{
+	content: "+";
+	font-size: 5em;
+	color: gray;
+	opacity: 0.5;
+}
+
+.table { display: table; }
+.row { display: table-row; }
+.cell { display: table-cell; border-collapse: collapse; }
