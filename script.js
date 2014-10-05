@@ -19,10 +19,7 @@
 
 		// New ticket
 		document.querySelector(".ticket.new").addEventListener("click", function(e){
-			this.insertAdjacentHTML("beforebegin", template);
-			var ticket = this.parentNode.querySelector('.ticket.create');
-			draggableize(ticket);
-			saveTicket(ticket);
+			saveTicket(createTicket(this, "before"));
 		});
 
 		// Drag & Drop
@@ -34,9 +31,9 @@
 		var dropzones = document.querySelectorAll('[dropzone="move"]');
 		for(var i = 0; i < dropzones.length; i++) {
 			dropzones[i].addEventListener("drop", function (event) {
-				this.insertAdjacentHTML("beforeend", event.dataTransfer.getData("text/html"));
-				var ticket = this.querySelector(".droppable");
-				draggableize(ticket);
+				var ticket = document.getElementById(event.dataTransfer.getData('text/plain'));
+				ticket.parentNode.removeChild(ticket);
+				this.appendChild(ticket);
 				saveTicket(ticket);
 
 			});
@@ -58,12 +55,10 @@
 	function draggableize(ticket){
 		ticket.addEventListener("dragstart", function(event){
 			event.dataTransfer.effectAllowed = "move";
-			event.target.classList.add("droppable");
-			event.dataTransfer.setData("text/html", event.target.outerHTML);
-			event.target.classList.remove("droppable");
+			event.dataTransfer.setData("text/plain", event.target.id);
 		});
 		ticket.addEventListener("dragend", function(event){
-			if(droppable) event.target.parentNode.removeChild(event.target);
+//			if(droppable) event.target.parentNode.removeChild(event.target);
 		});
 
 		ticket.classList.remove("create");
@@ -86,6 +81,7 @@
 		}
 
 		var ticket = document.querySelector(".ticket.create");
+		ticket.id = id;
 		draggableize(ticket);
 
 		return ticket;
