@@ -87,8 +87,14 @@
 		return ticket;
 	}
 
-	function saveTicket(ticket){
-		console.log(ticket)
+    function saveTicket(ticket){
+		var descriptor = {
+            state: ticket.parentNode.id,
+            ticket: ticket.outerHTML,
+            date: ticket.querySelector("input[type='date']").value
+        }
+
+        window.localStorage.setItem(ticket.id, JSON.stringify(descriptor));
 	}
 
 	// API
