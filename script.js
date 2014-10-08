@@ -6,7 +6,7 @@
 
 	document.addEventListener('DOMContentLoaded', init);
 
-	var template, droppable, uid;
+	var template, uid;
 
 	function init(){
 		template = document.getElementById("template").innerHTML;
@@ -41,6 +41,7 @@
 
 		var dropzones = document.querySelectorAll('[dropzone="move"]');
 		for(var i = 0; i < dropzones.length; i++) {
+
 			dropzones[i].addEventListener("drop", function (event) {
 				var ticket = document.getElementById(event.dataTransfer.getData('text/plain'));
 				ticket.parentNode.removeChild(ticket);
@@ -51,14 +52,12 @@
 
 			dropzones[i].addEventListener("dragover", function(event){
 				event.preventDefault();
-				droppable = true;
 			})
 			dropzones[i].addEventListener("dragenter",function(){
 				this.style.backgroundColor = "#F0FFF0";
 			});
 			dropzones[i].addEventListener("dragleave",function(){
 				this.style.backgroundColor = "transparent";
-				droppable = false;
 			});
 		}
 	}
@@ -67,9 +66,6 @@
 		ticket.addEventListener("dragstart", function(event){
 			event.dataTransfer.effectAllowed = "move";
 			event.dataTransfer.setData("text/plain", event.target.id);
-		});
-		ticket.addEventListener("dragend", function(event){
-//			if(droppable) event.target.parentNode.removeChild(event.target);
 		});
 
 		ticket.classList.remove("create");
@@ -104,6 +100,8 @@
             ticket: ticket.outerHTML,
             date: ticket.querySelector("input[type='date']").value
         }
+
+        console.log("Saving: ", descriptor);
 
         window.localStorage.setItem(ticket.id, JSON.stringify(descriptor));
 	}
