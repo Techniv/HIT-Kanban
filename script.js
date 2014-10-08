@@ -12,6 +12,17 @@
 		template = document.getElementById("template").innerHTML;
 		uid = 0;
 
+        for(var i =0; i< window.localStorage.length; i++){
+            var key = window.localStorage.key(i);
+            var descriptor = JSON.parse(window.localStorage.getItem(key));
+
+            document.getElementById(descriptor.state).insertAdjacentHTML("afterbegin", descriptor.ticket);
+            document.getElementById(key).querySelector("[type='date']").value = descriptor.date;
+
+            var num = parseInt(/([0-9]+)$/.exec(key)[1]);
+            uid = num > uid ? num : uid;
+        }
+
 		bindEvents();
 	}
 
@@ -97,9 +108,16 @@
         window.localStorage.setItem(ticket.id, JSON.stringify(descriptor));
 	}
 
+    function deleteTicket(ticket){
+        window.localStorage.removeItem(ticket.id);
+        ticket.parentNode.removeChild(ticket);
+        delete ticket;
+    }
+
 	// API
 	window.kanban = {
-		saveTicket: saveTicket
+		saveTicket: saveTicket,
+        deleteTicket: deleteTicket
 	}
 
 })(window);

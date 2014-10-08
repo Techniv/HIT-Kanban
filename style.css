@@ -50,6 +50,23 @@ main{
 	opacity: 0.5;
 }
 
+.ticket .close{
+    transition: opacity 1s ease;
+    opacity: 0.5;
+    transform: rotate(45deg);
+    display: block;
+    float: right;
+    padding-right: 5px;
+}
+.ticket .close:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+.ticket .close:before{
+    content: "+";
+    font-size: 16pt;
+}
+
 .table { display: table; }
 .row { display: table-row; }
 .cell { display: table-cell; border-collapse: collapse; }

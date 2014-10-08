@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html manifest="cache.manifest">
 <head>
 	<meta charset="UTF-8">
 	<title>HIT -  Kanban</title>
@@ -25,6 +25,7 @@
 	</main>
 	<script type="text/html" id="template">
 		<div class="ticket create" draggable="true">
+            <span class="close" onclick="kanban.deleteTicket(this.parentNode)"></span>
 			<h3 contenteditable="true" onblur="kanban.saveTicket(this.parentNode)">Titre</h3>
 			<p contenteditable="true" onblur="kanban.saveTicket(this.parentNode)">Description</p>
 			<label>Date : </label><input type="date" onchange="kanban.saveTicket(this.parentNode)"/>
